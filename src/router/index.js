@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Login from "../Pages/Login";
-import allroutes from "./allRoutes";
+// import allroutes from "./allRoutes";
 
 Vue.use(VueRouter);
 
