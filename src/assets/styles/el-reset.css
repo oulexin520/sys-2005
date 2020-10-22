@@ -1,0 +1,8 @@
+.home .el-carousel {
+    width: 300px;
+  }       
+  /*登录页*/
+  .login-page.el-input_inner{
+    width: 83%;
+  }
+  /*对类名加上限制 .home，避免污染*/        

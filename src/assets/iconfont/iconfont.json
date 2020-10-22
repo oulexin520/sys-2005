@@ -1,0 +1,51 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1614448",
+      "name": "考勤管理",
+      "font_class": "kaoqinguanli",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "7450657",
+      "name": "展开",
+      "font_class": "zhankai",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "7817465",
+      "name": "我的",
+      "font_class": "yixianshi_huaban",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "8387572",
+      "name": "学员管理",
+      "font_class": "xueyuanguanli",
+      "unicode": "e691",
+      "unicode_decimal": 59025
+    },
+    {
+      "icon_id": "11175683",
+      "name": "收起",
+      "font_class": "shouqi",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "14915072",
+      "name": "数据统计",
+      "font_class": "shujutongji-05",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    }
+  ]
+}
