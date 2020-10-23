@@ -1,6 +1,10 @@
 import axios from "axios";
 import router from "../router";
-import ElementUI from "element-ui";
+import ElementUI, { CarouselItem } from "element-ui";
+import NProgress from "nprogress";
+
+//中断请求属性
+ export let CancelToken =axios.CancelToken;
 
 axios.defaults.baseURL =
   process.env.NODE_ENV === "development" ? "/api" : "http://www.chst.vip";
@@ -24,12 +28,17 @@ axios.interceptors.request.use(config => {
 
 //响应式拦截
 axios.interceptors.response.use(config => {
-  //console.log(config);
+  
+  console.log(config);
   let { data } = config;
-  if (data.code == "1004") {
+  if (data.code == "1004" ||data.code =="10022") {
     //在当前api1004代表校验失败，提示错误，并且让页面跳转到登录页
     ElementUI.Message.error("登录信息失效，请重新登录");
+    localStorage.removeItem("wf-token")
+    //去掉token
     router.push("/login");
+    //刷新页面
+    window.location.reload()
   }
   return config;
 });

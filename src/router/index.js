@@ -3,6 +3,12 @@ import VueRouter from "vue-router";
 import Login from "../Pages/Login";
 // import allroutes from "./allRoutes";
 
+//解决路由导航到统一路径重复报错的问题
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -11,12 +17,7 @@ const routes = [
     path: "/login",
     component: Login
   },
-  {
-    path: "/",
-    name: "home",
-    component: () => import(/* webpackChunkName: "about" */ "../Pages/Home"),
-    children: []
-  }
+
 ];
 
 const router = new VueRouter({

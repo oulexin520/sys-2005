@@ -34,9 +34,9 @@
         ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('loginForm')"
-          >提交</el-button
-        >
+        <el-button type="primary" @click="submitForm('loginForm')">
+          提交
+          </el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -117,7 +117,7 @@ export default {
                 //设置vuex中的state[userInfo]的值
                 this.SET_USERINFO(res.data.userInfo);
                 //跳转到主页
-                this.$router.push("/");
+                this.$router.push("/Welcome");
               } else {
                 //用户名密码错误
                 this.$message.error("用户名或密码错误");

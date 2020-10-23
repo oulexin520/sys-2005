@@ -1,33 +1,19 @@
 <template>
   <el-container>
     <el-aside width="200">
+      <h1 class="logo"></h1>
       <!-- 侧边栏 -->
       <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-        <!-- <el-radio-button :label="false">展开</el-radio-button>
-        <el-radio-button :label="true">收起</el-radio-button> -->
       </el-radio-group>
       <el-menu
-        default-active="1-4-1"
+        :default-active="$route.path"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
         :router="true"
         :collapse="isCollapse"
       >
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-location"></i>
-            <span slot="title">导航一</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-        <el-menu-item index="/student">
-          学员信息
-        </el-menu-item>
-        <el-menu-item index="/student">管理信息</el-menu-item>
+        <qf-sub-menu :sideMenu="menuList"></qf-sub-menu>
       </el-menu>
     </el-aside>
     <el-container>
@@ -52,12 +38,24 @@
               <span class="nickname" @click="$router.push('/Mine')"
                 >{{ $store.state.userInfo.nickname }}
               </span>
-              <span class="quit">退出</span>
+              <span class="quit" @click="quit">退出</span>
             </div>
           </el-col>
         </el-row>
       </el-header>
+      <!-- 主页内容 -->
       <el-main>
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+          <el-breadcrumb-item :to="{ path: '/Welcome' }"
+            >首页</el-breadcrumb-item
+          >
+          <el-breadcrumb-item
+            :to="{ path: crumbs.path }"
+            v-for="crumbs in crumbs"  :key="crumbs.id"
+          >
+            {{ crumbs.meta.name }}
+          </el-breadcrumb-item>
+        </el-breadcrumb>
         <router-view> </router-view>
       </el-main>
     </el-container>
@@ -65,8 +63,11 @@
 </template>
 <script>
 //权限菜单
-//一个菜单名字对应一个路由(页面)
-//
+//一个菜单名字对个路由(页面)
+
+// import { getLoginLog } from "@/api";
+// import subMenu from "../../components/subMenu"
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -75,12 +76,30 @@ export default {
         "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603280281956&di=b78fade8f0f99e851c85600dda019149&imgtype=0&src=http%3A%2F%2Fpic36.nipic.com%2F20131201%2F13022407_190847577169_2.jpg"
     };
   },
+  computed: {
+    ...mapState(["userInfo", "menuList", "crumbs"])
+  },
+  mounted() {
+    // getLoginLog().then(res => {
+    //   console.log(res);
+    // });
+  },
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    quit() {
+      //退出登录
+      //清楚token和userInfo
+      //跳转到登录页
+      localStorage.removeItem("wf-token");
+      localStorage.removeItem("wf-userInfo");
+      this.$router.push("/login");
+      // 刷新页面
+      window.location.reload();
     }
   }
 };
@@ -170,13 +189,8 @@ body > .el-container {
   font-size: 20px;
   color: #000;
 }
-/* .el-aside h1 {
-  color: #fff;
-} */
-/* .el-aside {
-    background: linear-gradient(135deg, #5635df, #4c67ff);
-  }
-  .el-menu {
-    border-right: solid 1px #48a916 !important;
-  } */
+
+.quit {
+  cursor: pointer;
+}
 </style>
